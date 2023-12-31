@@ -1,14 +1,23 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2024年已至</title>
+    <meta charset="utf-8">
+    <title>2023已为过去</title>
+    <title>迎接2024</title>
     <style>
-        body {
-            margin: 0;
+        * {
             padding: 0;
-            overflow: hidden;
+            margin: 0;
+        }
+
+        canvas {
+            background: transparent;
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         #background {
@@ -17,6 +26,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover; /* 保持原始比例并填充整个容器 */
             z-index: -1;
         }
 
@@ -28,22 +38,44 @@
             text-align: center;
             color: white;
             font-size: 24px;
+            z-index: 1;
         }
     </style>
+    <style>@import url('https://fonts.googleapis.com/css?family=Orbitron:400,500');</style>
+
+    <script language="JavaScript" src="lib/vec.js"></script>
+    <script language="JavaScript" src="lib/drawString.js"></script>
+    <script language="JavaScript" src="lib/firework.js"></script>
+    <script language="JavaScript" src="lib/particle.js"></script>
+    <script language="JavaScript" src="lib/main.js"></script>
 </head>
+
 <body>
-    <audio id="background-music" autoplay loop>
+    <audio id="background-music" loop>
         <source src="不怕1.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
 
+    <button onclick="playMusic()">Play Music</button>
+
     <img id="background" src="1.jpg" alt="Background Image">
 
+    <canvas id="fireworks"></canvas>
+
     <div id="content">
-        <p id="custom-text">Happy New Year!</p>
+        <p id="custom-text">在新的一年里</p>
+    <p>愿你忘却昨日的泪水</p>
+    <p>愿你的快乐比狗狗追着尾巴还多，笑声比猫咪挠痒痒还甜</p>
+    <p>迎接新年的欢笑与快乐！</p>
     </div>
 
     <script>
+        function playMusic() {
+            var audio = document.getElementById("background-music");
+            audio.play();
+            document.querySelector("button").style.display = "none"; // 隐藏按钮
+        }
+
         // Customize the text and display speed
         const customText = "Happy New Year! Welcome to 2024!";
         const displaySpeed = 100; // Adjust the speed (milliseconds per character)
@@ -67,4 +99,5 @@
         displayTextWithDelay(customText, displaySpeed);
     </script>
 </body>
+
 </html>
