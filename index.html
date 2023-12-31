@@ -11,7 +11,7 @@
         }
 
         body {
-            overflow: hidden; /* 防止滚动条 */
+            overflow: hidden;
         }
 
         canvas {
@@ -27,8 +27,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw; /* 使用视窗宽度单位 */
-            height: 100vh; /* 使用视窗高度单位 */
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
             z-index: -1;
         }
@@ -47,8 +47,6 @@
 
         #musicButton, #nextButton, #prevButton {
             position: fixed;
-            bottom: 10px;
-            right: 10px;
             padding: 10px;
             font-size: 16px;
             background-color: #4CAF50;
@@ -58,8 +56,14 @@
             cursor: pointer;
         }
 
+        #musicButton {
+            top: 10px;
+            left: 10px;
+        }
+
         #nextButton, #prevButton {
-            bottom: 60px;
+            bottom: 10px;
+            right: 10px;
         }
     </style>
     <style>@import url('https://fonts.googleapis.com/css?family=Orbitron:400,500');</style>
