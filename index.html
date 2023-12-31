@@ -26,7 +26,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 保持原始比例并填充整个容器 */
+            object-fit: cover;
             z-index: -1;
         }
 
@@ -38,6 +38,7 @@
             text-align: center;
             color: white;
             font-size: 24px;
+            font-family: "Arial, sans-serif";
             z-index: 1;
         }
     </style>
@@ -56,34 +57,27 @@
         Your browser does not support the audio element.
     </audio>
 
-    <button onclick="playMusic()">Play Music</button>
+    <button onclick="startDisplayText()">显示文字</button>
 
     <img id="background" src="1.jpg" alt="Background Image">
 
     <canvas id="fireworks"></canvas>
 
     <div id="content">
-        <p id="custom-text">在新的一年里</p>
-    <p>愿你忘却昨日的泪水</p>
-    <p>愿你的快乐比狗狗追着尾巴还多，笑声比猫咪挠痒痒还甜</p>
-    <p>迎接新年的欢笑与快乐！</p>
+        <p id="custom-text"></p>
     </div>
 
     <script>
-        function playMusic() {
-            var audio = document.getElementById("background-music");
-            audio.play();
-            document.querySelector("button").style.display = "none"; // 隐藏按钮
+        const customTexts = ["在新的一年里", "愿你忘却昨日的泪水", "愿你的快乐比狗狗追着尾巴还多","，笑声比猫咪挠痒痒还甜","迎接新年的欢笑与快乐！"];
+        let currentIndex = 0;
+
+        function startDisplayText() {
+            if (currentIndex < customTexts.length) {
+                displayTextWithDelay(customTexts[currentIndex], 100);
+                currentIndex++;
+            }
         }
 
-        // Customize the text and display speed
-        const customText = "Happy New Year! Welcome to 2024!";
-        const displaySpeed = 100; // Adjust the speed (milliseconds per character)
-
-        // Set the custom text
-        document.getElementById('custom-text').innerText = '';
-
-        // Function to display text with a delay
         function displayTextWithDelay(text, speed) {
             let index = 0;
             const interval = setInterval(() => {
@@ -91,12 +85,25 @@
                 index++;
                 if (index === text.length) {
                     clearInterval(interval);
+                    createFirework(); // 在文本显示完成后创建烟花
                 }
             }, speed);
         }
 
-        // Start displaying text
-        displayTextWithDelay(customText, displaySpeed);
+        function createFirework() {
+            const fireworksCanvas = document.getElementById('fireworks');
+            fireworksCanvas.style.display = 'block';
+            fireworksCanvas.width = window.innerWidth;
+            fireworksCanvas.height = window.innerHeight;
+
+            const fireworks = new Fireworks(fireworksCanvas);
+            fireworks.start();
+        }
+
+        // 触发网页加载时的定时烟花效果
+        setTimeout(() => {
+            createFirework();
+        }, 3000); // 3秒后触发烟花效果
     </script>
 </body>
 
