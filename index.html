@@ -10,6 +10,10 @@
             margin: 0;
         }
 
+        body {
+            overflow: hidden; /* 防止滚动条 */
+        }
+
         canvas {
             background: transparent;
             display: block;
@@ -23,8 +27,8 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw; /* 使用视窗宽度单位 */
+            height: 100vh; /* 使用视窗高度单位 */
             object-fit: cover;
             z-index: -1;
         }
@@ -87,7 +91,7 @@
 
     <script>
         const customTexts = ["在新的一年里", "愿你忘却昨日的泪水", "愿你的快乐比狗狗追着尾巴还多", "笑声比猫咪挠痒痒还甜", "迎接新年的欢笑与快乐！"];
-        let currentIndex = 0;
+        let currentIndex = -1;
 
         function playMusic() {
             const music = document.getElementById('background-music');
@@ -136,7 +140,6 @@
 
         function createFirework() {
             const fireworksCanvas = document.getElementById('fireworks');
-            fireworksCanvas.style.display = 'block';
             fireworksCanvas.width = window.innerWidth;
             fireworksCanvas.height = window.innerHeight;
 
