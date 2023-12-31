@@ -63,9 +63,7 @@
 
       // Customize your image URLs here
       const imageUrls = [
-        "image1.jpg",
-        "image2.jpg",
-        "image3.jpg"
+        "1.jpg"
       ];
 
       // Set the custom text
