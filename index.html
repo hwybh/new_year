@@ -49,7 +49,9 @@
       <p id="text"></p>
     </div>
 
-    <audio controls autoplay loop>
+    <button onclick="playAudio()">点击播放音频</button>
+
+    <audio id="myAudio" controls loop>
       <source src="不怕.mp3" type="audio/mp3">
       Your browser does not support the audio tag.
     </audio>
@@ -88,6 +90,12 @@
         imgElement.src = url;
         imageGallery.appendChild(imgElement);
       });
+
+      // Play audio function
+      function playAudio() {
+        const audio = document.getElementById('myAudio');
+        audio.play();
+      }
     </script>
   </div>
 </body>
