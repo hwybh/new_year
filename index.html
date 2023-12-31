@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>迎接2024</title>
+    <title>欢迎来到2024</title>
     <style>
         * {
             padding: 0;
@@ -41,11 +41,14 @@
             z-index: 1;
         }
 
+        #button-container {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 2;
+        }
+
         button {
-            position: absolute;
-            top: 70%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             padding: 10px 20px;
             font-size: 16px;
             background-color: #4CAF50;
@@ -53,6 +56,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-right: 10px;
         }
     </style>
     <style>@import url('https://fonts.googleapis.com/css?family=Orbitron:400,500');</style>
@@ -70,7 +74,7 @@
         Your browser does not support the audio element.
     </audio>
 
-    <button onclick="startDisplayText()">开始</button>
+    <button id="play-music" onclick="playMusic()">播放音乐</button>
 
     <img id="background" src="1.jpg" alt="Background Image">
 
@@ -80,11 +84,25 @@
         <p id="custom-text"></p>
     </div>
 
+    <div id="button-container">
+        <button onclick="showNextSentence()">下一句</button>
+        <button onclick="clearText()">清除文本</button>
+    </div>
+
     <script>
         const customTexts = ["在新的一年里", "愿你忘却昨日的泪水", "愿你的快乐比狗狗追着尾巴还多", "，笑声比猫咪挠痒痒还甜", "迎接新年的欢笑与快乐！"];
         let currentIndex = 0;
 
-        function startDisplayText() {
+        // 初始化时触发整个网页的烟花效果
+        createFirework();
+
+        function playMusic() {
+            const audio = document.getElementById("background-music");
+            audio.play();
+            document.getElementById("play-music").style.display = "none"; // 隐藏播放音乐按钮
+        }
+
+        function showNextSentence() {
             if (currentIndex < customTexts.length) {
                 document.getElementById('custom-text').innerText = ''; // 清空之前的文本
                 displayTextWithDelay(customTexts[currentIndex], 100);
@@ -99,9 +117,13 @@
                 index++;
                 if (index === text.length) {
                     clearInterval(interval);
-                    createFirework();
+                    createFirework(); // 在文本显示完成后创建烟花
                 }
             }, speed);
+        }
+
+        function clearText() {
+            document.getElementById('custom-text').innerText = ''; // 清除文本
         }
 
         function createFirework() {
@@ -114,10 +136,16 @@
             fireworks.start();
         }
 
-        // 触发网页加载时的定时烟花效果
-        setTimeout(() => {
-            createFirework();
-        }, 3000); // 3秒后触发烟花效果
+        // 在每句文字显示完成后触发点击按钮的独立烟花效果
+        function createClickFirework() {
+            const fireworksCanvas = document.getElementById('fireworks');
+            fireworksCanvas.style.display = 'block';
+            fireworksCanvas.width = window.innerWidth;
+            fireworksCanvas.height = window.innerHeight;
+
+            const fireworks = new Fireworks(fireworksCanvas);
+            fireworks.start();
+        }
     </script>
 </body>
 
