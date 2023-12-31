@@ -63,25 +63,31 @@
       const customText = "Happy New Year!";
       const speed = 100; // in milliseconds
 
+      // Set the custom text
+      const textElement = document.getElementById('text');
+
+      // Display text with specified speed
+      function displayText() {
+        let index = 0;
+        function showText() {
+          if (index <= customText.length) {
+            textElement.textContent = customText.slice(0, index);
+            index++;
+            setTimeout(showText, speed);
+          }
+        }
+        showText();
+      }
+
+      // Run displayText after the page has loaded
+      document.addEventListener("DOMContentLoaded", function() {
+        displayText();
+      });
+
       // Customize your image URLs here
       const imageUrls = [
         "1.jpg"
       ];
-
-      // Set the custom text
-      const textElement = document.getElementById('text');
-      textElement.textContent = customText;
-
-      // Display text with specified speed
-      let index = 0;
-      function displayText() {
-        if (index <= customText.length) {
-          textElement.textContent = customText.slice(0, index);
-          index++;
-          setTimeout(displayText, speed);
-        }
-      }
-      displayText();
 
       // Display images
       const imageGallery = document.getElementById('image-gallery');
